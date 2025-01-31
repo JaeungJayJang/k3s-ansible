@@ -1,0 +1,19 @@
+
+
+# run update and upgrade command on all servers
+- name: Update and upgrade all servers
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      tags: update
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        autoclean: yes
+        autoremove: yes
+      tags: upgrade
